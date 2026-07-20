@@ -20,6 +20,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Privacy()
         {
+            var abc = ;
             return View();
         }
 
