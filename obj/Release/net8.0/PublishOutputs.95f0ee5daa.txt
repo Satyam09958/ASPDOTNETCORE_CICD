@@ -1,0 +1,7 @@
+D:\Pathon2\Demo1\WebApplication1\WebApplication1\bin\Release\net8.0\publish\WebApplication1.exe
+D:\Pathon2\Demo1\WebApplication1\WebApplication1\bin\Release\net8.0\publish\appsettings.Development.json
+D:\Pathon2\Demo1\WebApplication1\WebApplication1\bin\Release\net8.0\publish\appsettings.json
+D:\Pathon2\Demo1\WebApplication1\WebApplication1\bin\Release\net8.0\publish\WebApplication1.dll
+D:\Pathon2\Demo1\WebApplication1\WebApplication1\bin\Release\net8.0\publish\WebApplication1.deps.json
+D:\Pathon2\Demo1\WebApplication1\WebApplication1\bin\Release\net8.0\publish\WebApplication1.runtimeconfig.json
+D:\Pathon2\Demo1\WebApplication1\WebApplication1\bin\Release\net8.0\publish\WebApplication1.pdb
