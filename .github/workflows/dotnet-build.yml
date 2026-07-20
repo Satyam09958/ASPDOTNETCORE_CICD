@@ -1,35 +1,81 @@
-name: ASP.NET Core CI
+# name: ASP.NET Core CI
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+#   pull_request:
+#     branches:
+#       - main
+
+# jobs:
+
+#   build:
+
+#     runs-on: ubuntu-latest
+
+#     steps:
+
+#     - name: Checkout Code
+#       uses: actions/checkout@v4
+
+#     - name: Setup .NET
+#       uses: actions/setup-dotnet@v4
+#       with:
+#         dotnet-version: 8.0.x
+
+#     - name: Restore
+#       run: dotnet restore WebApplication1.csproj
+
+#     - name: Build
+#       run: dotnet build WebApplication1.csproj --configuration Release --no-restore
+
+#     # - name: Test
+#     #   run: dotnet test WebApplication1.csproj --configuration Release --no-build
+
+name: ASP.NET Core CI/CD
 
 on:
   push:
     branches:
       - main
 
-  pull_request:
-    branches:
-      - main
-
 jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: self-hosted
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Checkout Code
-      uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore
 
-    - name: Restore
-      run: dotnet restore WebApplication1.csproj
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
-    - name: Build
-      run: dotnet build WebApplication1.csproj --configuration Release --no-restore
+      - name: Publish
+        run: dotnet publish --configuration Release -o ./publish
 
-    # - name: Test
-    #   run: dotnet test WebApplication1.csproj --configuration Release --no-build
+      - name: Stop IIS Website
+        shell: powershell
+        run: |
+          Import-Module WebAdministration
+          Stop-Website -Name "CICD"
+
+      - name: Copy Files to IIS
+        shell: powershell
+        run: |
+          Copy-Item ".\publish\*" "D:\All_Project\CICD\publish" -Recurse -Force
+
+      - name: Start IIS Website
+        shell: powershell
+        run: |
+          Import-Module WebAdministration
+          Start-Website -Name "CICD"
