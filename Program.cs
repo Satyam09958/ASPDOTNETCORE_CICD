@@ -16,6 +16,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+
+
+//Satyam Singh
+
 app.UseRouting();
 
 app.UseAuthorization();
